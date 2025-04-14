@@ -1,0 +1,16 @@
+# node modules
+node_modules/
+
+# byggmappar
+dist/
+build/
+
+# loggar
+*.log
+
+# miljöfiler
+.env
+
+# OS-specifika
+.DS_Store
+Thumbs.db
