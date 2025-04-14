@@ -24,11 +24,10 @@ const LoginPage = () => {
 
 
   return (
-    <div>
-        <h3>LoginPage</h3>
-        <input type="text" onChange={(e) => setUserName(e.target.value)}/>
-        <input type="password" onChange={(e) => setPassword(e.target.value)}/>
-        <button onClick={handeLogin}>Login</button>
+    <div className='w-[100] h-screen flex flex-col items-center justify-center'>
+        <input type="text" onChange={(e) => setUserName(e.target.value)} className='bg-white w-3xs rounded-md text-center py-1 mb-1' placeholder='username'/>
+        <input type="password" onChange={(e) => setPassword(e.target.value)} className='bg-white w-3xs rounded-md text-center py-1 mb-1' placeholder='password'/>
+        <button onClick={handeLogin} className='bg-blue-950 text-white w-[100px] rounded-md py-1 hover:bg-blue-300 hover:cursor-pointer'>Login</button>
         <button onClick={() => navigate('/register')}>Register</button>
     </div>
   )
