@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useContext } from 'react'
 import { PostsContext } from '../context/PostsContext'
+import Post from './Post'
 
 const Posts = () => {
 
@@ -10,16 +11,13 @@ const Posts = () => {
     
 
   return (
-    <div>Posts
-      <ul>
+      <ul className='flex flex-col gap-1 w-100'>
         {posts.map((post) => (
-          <li key={post._id}>
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
-          </li>
+          <Post post={post} />
+          
         ))}
       </ul>
-    </div>
+
   )
 }
 
