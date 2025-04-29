@@ -10,6 +10,15 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    likes: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    comments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
+    }],
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
