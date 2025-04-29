@@ -27,12 +27,14 @@ const RegisterPage = () => {
 
 
     return (
-        <div>
-            <h3>RegisterPage</h3>
-            <input type="text" placeholder='Username' onChange={(e) => setUserName(e.target.value)} />
-            <input type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
-            <input type="email" placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
-            <button type='submit' onClick={handleRegister}>Submit</button>
+        <div className='flex justify-center items-center h-screen'>
+            <div className='flex flex-col items-center'>
+
+            <input type="text" placeholder='Username' onChange={(e) => setUserName(e.target.value)} className='bg-white w-3xs rounded-md text-center py-1 mb-1'/>
+            <input type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} className='bg-white w-3xs rounded-md text-center py-1 mb-1'/>
+            <input type="email" placeholder='Email' onChange={(e) => setEmail(e.target.value)} className='bg-white w-3xs rounded-md text-center py-1 mb-1'/>
+            <button type="submit" onClick={handleRegister} className='bg-blue-950 text-white w-[100px] rounded-md py-1 hover:bg-blue-300 hover:cursor-pointer'>Submit</button>
+            </div>
         </div>
     )
 }
