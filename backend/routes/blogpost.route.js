@@ -1,12 +1,13 @@
 import express from 'express';
 import BlogPost from '../models/blogpost.model.js';
+import User from '../models/user.model.js';
 import {auth} from '../middleware/auth.js';
 
 const router = express.Router();
 
 router.get('/', async (req,res) => {
     try {
-        const blogposts = await BlogPost.find()
+        const blogposts = await BlogPost.find().populate('author')
         if(!blogposts) {
             res.json({message: "No blogposts found"})
             return
@@ -69,7 +70,7 @@ router.post('/', auth, async (req,res) => {
         return;
     }
 
-    body.author = req.user.userID
+    body.author = req.user.userId
     console.log(body)
     try {
         const blogpost = await BlogPost.create(body)
