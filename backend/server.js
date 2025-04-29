@@ -7,6 +7,7 @@ import userRouter from './routes/user.route.js'
 import loginRouter from './routes/login.route.js'
 import authRouter from './routes/auth.route.js'
 import friendsRouter from './routes/friends.route.js';
+import commentsRouter from './routes/comments.route.js'
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use('/api/users', userRouter)
 app.use('/login', loginRouter)
 app.use('/auth/verify', authRouter)
 app.use('/friends',friendsRouter);
+app.use('/comments', commentsRouter)
 
 app.get('/', (req,res) => {
     console.log('Hello world!')
