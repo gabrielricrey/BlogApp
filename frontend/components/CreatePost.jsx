@@ -6,18 +6,19 @@ import { PostsContext } from '../context/PostsContext';
 
 const CreatePost = () => {
 
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
-    const { addPost } = useContext(PostsContext)
+  const { addPost } = useContext(PostsContext)
 
-    
+
   return (
     <div>
-        <h3>Create Post</h3>
-        <input type="text" placeholder='Title' onChange={(e) => setTitle(e.target.value)}/>
-        <textarea placeholder='Content' onChange={(e) => setContent(e.target.value)}></textarea>
-        <button type='submit' onClick={() => addPost({title,content})}>Submit</button>
+      <div className='flex flex-col items-center'>
+        <input type="text" placeholder='Title' onChange={(e) => setTitle(e.target.value)} className='bg-white rounded-md p-2 mt-2 w-100'/>
+        <textarea placeholder='Content' onChange={(e) => setContent(e.target.value)} className='bg-white rounded-md p-2 m-2 w-100'></textarea>
+        <button type='submit' onClick={() => addPost({ title, content })} className='bg-blue-950 text-white w-[100px] rounded-md py-1 hover:bg-blue-300 hover:cursor-pointer'>Submit</button>
+      </div>
     </div>
   )
 }
