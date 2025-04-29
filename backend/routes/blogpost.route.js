@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', async (req,res) => {
     try {
-        const blogposts = await BlogPost.find().populate('author')
+        const blogposts = await BlogPost.find().populate('author').populate({path: 'comments', populate: 'author'})
         if(!blogposts) {
             res.json({message: "No blogposts found"})
             return
