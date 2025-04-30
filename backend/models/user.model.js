@@ -28,6 +28,14 @@ const userSchema = new mongoose.Schema({
     sentRequests: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    }],
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'BlogPost'
+    }],
+    comments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
     }]
 
 })
