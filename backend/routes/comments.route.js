@@ -1,6 +1,7 @@
 import express from 'express';
 import Comment from '../models/comments.model.js';
 import BlogPost from '../models/blogpost.model.js';
+import User from '../models/user.model.js'
 import { auth } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -18,6 +19,7 @@ router.post('/:id', auth, async (req,res) => {
         comment.save();
 
         await BlogPost.findByIdAndUpdate(postId, { $push: {comments: comment._id}})
+        await User.findByIdAndUpdate(req.user.userId, { $push: {comments: comment._id}})
         res.status(201).json({success: true, commentCreated: comment})
 
 
