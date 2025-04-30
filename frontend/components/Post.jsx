@@ -3,7 +3,7 @@ import {HandThumbUpIcon, ChatBubbleBottomCenterIcon, PaperAirplaneIcon} from '@h
 import Comments from './Comments';
 
 const Post = ({post}) => {
-    console.log(post);
+
     return (
         <li key={post._id} className='bg-blue-900 p-2 border-2 rounded-md relative'>
             <h4 className='absolute top-0 right-0 text-white'>Posted by: {post.author.username}</h4>
