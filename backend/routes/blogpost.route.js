@@ -65,16 +65,17 @@ router.put('/:id', async (req,res) => {
 
 router.post('/', auth, async (req,res) => {
     const body = req.body;
+    
     if(!body.title || !body.content) {
         res.json({error: "Title and content required"})
         return;
     }
 
     body.author = req.user.userId
-    console.log(body)
     try {
         const blogpost = await BlogPost.create(body)
         res.status(200).json({success: true, post: blogpost});
+        await User.findByIdAndUpdate(req.user.userId, { $push: {posts: blogpost._id}},{new: true})
 
     } catch(error) {
         res.status(500).json({error: "Error creating blogpost", error})
