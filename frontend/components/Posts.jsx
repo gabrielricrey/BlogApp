@@ -12,7 +12,7 @@ const Posts = () => {
 
   return (
       <ul className='flex flex-col gap-1 w-100'>
-        {posts.map((post) => (
+        {posts && posts.map((post) => (
           <Post post={post} />
           
         ))}
