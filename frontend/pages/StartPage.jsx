@@ -14,6 +14,7 @@ const StartPage = () => {
       const token = JSON.parse(localStorage.getItem('token'))
       if (!token) {
         navigate('/')
+        return;
       }
 
       try {
