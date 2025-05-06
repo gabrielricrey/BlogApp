@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
+import FriendOptions from '../components/FriendOptions';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -61,9 +62,7 @@ const ProfilePage = () => {
             </button>
           )}
           {user && loggedInUser && user.username !== loggedInUser.username && (
-            <button className='p-2 border-2 bg-blue-300 absolute right-5 rounded-md hover:cursor-pointer hover:border-white'>
-              Add friend
-            </button>
+            <FriendOptions/>
           )}
         </div>
 
