@@ -4,13 +4,17 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { PostsProvider } from '../context/PostsContext.jsx'
+import { UserProvider } from '../context/UserContext.jsx';
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Router>
-      <PostsProvider>
-      <App />
-      </PostsProvider>
-    </Router>
+    <UserProvider>
+      <Router>
+        <PostsProvider>
+          <App />
+        </PostsProvider>
+      </Router>
+    </UserProvider>
   </StrictMode>,
 )
