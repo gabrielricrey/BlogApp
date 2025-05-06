@@ -57,9 +57,10 @@ router.get('/:id', auth, async (req, res) => {
 
 router.get('/', auth, async (req, res) => {
   const query = req.query.search;
+  const currentUserId = req.user.userId
 
   try {
-    const users = await User.find({ username: { $regex: query, $options: 'i' } });
+    const users = await User.find({ username: { $regex: query, $options: 'i' },_id: {$ne: currentUserId} });
     res.status(200).json(users);
 
   } catch (error) {
