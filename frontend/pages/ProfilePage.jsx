@@ -35,6 +35,18 @@ const ProfilePage = () => {
           navigate('/');
         }
       }
+      if (id) {
+        try {
+          const response = await axios.get(`http://localhost:3000/api/blogpost/user/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+
+          setPosts(response.data);
+        } catch (error) {
+          console.log('Token är ogiltig eller har gått ut:', error);
+          navigate('/');
+        }
+      }
     }
 
     getUserInfo();
@@ -60,12 +72,13 @@ const ProfilePage = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      console.log(response);
+      if(response.data) {
+        setPosts(response.data);
+      }
 
-      setPosts(response.data);
     } catch (error) {
       console.log('Token är ogiltig eller har gått ut:', error);
-      navigate('/');
+
     }
   }
 
