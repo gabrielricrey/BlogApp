@@ -12,10 +12,10 @@ const StartPage = () => {
   const {loggedInUser} = useContext(UserContext)
 
   useEffect(() => {
-    if(!loggedInUser) {
+    if(!localStorage.getItem('token')) {
       navigate('/')
     }
-  }, [loggedInUser])
+  }, [])
 
   return (
     <div className='w-[100] h-screen flex flex-col justify-center items-center'>
