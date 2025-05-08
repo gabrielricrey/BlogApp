@@ -64,6 +64,31 @@ router.post('/:id/accept-request/', auth, async (req,res) => {
     }
 })
 
+router.post('/:id/deny-request/', auth, async (req,res) => {
+    const {id} = req.params;
+    const currentUserId = req.user.userId
+
+    try{
+
+        const currentUser = await User.findById(currentUserId);
+        const sender = await User.findById(id)
+        
+        if(!currentUser.friendRequests.includes(id)) {
+            return res.status(400).json({message: 'No friend request'})
+        }
+        
+        currentUser.friendRequests = currentUser.friendRequests.filter((reqId) => reqId.toString() !== id)
+        sender.sentRequests = sender.sentRequests.filter((sentId) => sentId.toString() !== currentUserId);
+        
+        await currentUser.save();
+        await sender.save();
+        
+        res.status(200).json({message: 'Friend request denied!'})
+    } catch(error) {
+        res.status(500).json({message: 'Server error' + error})
+    }
+})
+
 router.get('/', auth, async(req,res) => {
     const id = req.user.userId
     try {
