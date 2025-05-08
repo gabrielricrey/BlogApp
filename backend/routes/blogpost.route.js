@@ -18,6 +18,21 @@ router.get('/', async (req,res) => {
     }
 })
 
+router.get('/myposts', auth, async (req,res) => {
+    const id = req.user.userId
+    try {
+        const posts = await BlogPost.find({author: id}).populate('author').populate({path: 'comments', populate: 'author'})
+
+        if(posts.length === 0) {
+            return res.status(404).json({message: 'No posts found'})
+        }
+
+        res.status(200).json(posts)
+    } catch (error) {
+        res.status(500).json({error: "Error getting blogposts", errorMessage: error})
+    }
+})
+
 router.get('/:id', async (req,res) => {
     const {id} = req.params
     try {
@@ -31,6 +46,8 @@ router.get('/:id', async (req,res) => {
         res.status(500).json({error: "Error getting blogpost", errorMessage: error})
     }
 })
+
+
 
 router.delete('/:id', async (req,res) => {
     const {id} = req.params

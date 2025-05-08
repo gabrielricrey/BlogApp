@@ -5,10 +5,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import FriendOptions from '../components/FriendOptions';
+import Post from '../components/Post'
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
-
+  const [posts, setPosts] = useState(null)
   const { id } = useParams();
   const navigate = useNavigate();
   const { loggedInUser } = useContext(UserContext);
@@ -31,7 +32,7 @@ const ProfilePage = () => {
           setUser(response.data);
         } catch (error) {
           console.log('Token är ogiltig eller har gått ut:', error);
-          navigate('/start');
+          navigate('/');
         }
       }
     }
@@ -42,8 +43,32 @@ const ProfilePage = () => {
   useEffect(() => {
     if (!id && loggedInUser) {
       setUser(loggedInUser);
+      getMyPosts();
+
     }
   }, [id, loggedInUser]);
+
+  const getMyPosts = async () => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    if (!token) {
+      navigate('/');
+      return;
+    }
+
+    try {
+      const response = await axios.get("http://localhost:3000/api/blogpost/myposts", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log(response);
+
+      setPosts(response.data);
+    } catch (error) {
+      console.log('Token är ogiltig eller har gått ut:', error);
+      navigate('/');
+    }
+  }
+
 
 
 
@@ -62,7 +87,7 @@ const ProfilePage = () => {
             </button>
           )}
           {user && loggedInUser && user.username !== loggedInUser.username && (
-            <FriendOptions/>
+            <FriendOptions />
           )}
         </div>
 
@@ -82,6 +107,9 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
+        <ul>
+          {posts && posts.map(post => <Post post={post}/>)}
+        </ul>
       </div>
     </div>
   );
