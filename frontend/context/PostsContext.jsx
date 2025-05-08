@@ -42,7 +42,7 @@ export const PostsProvider = ({ children }) => {
     };
 
     fetchPosts();
-  }, []);
+  }, [posts]);
 
   return (
     <PostsContext.Provider value={{ posts, loading, addPost }}>
