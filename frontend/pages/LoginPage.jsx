@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 
 const LoginPage = () => {
@@ -9,6 +10,8 @@ const LoginPage = () => {
     let [password,setPassword] = useState("");
 
     let navigate = useNavigate();
+
+    const {verifyUser} = useContext(UserContext);
     
 
     useEffect(() => {
@@ -23,6 +26,7 @@ const LoginPage = () => {
       
       if(response.data.token) {
         localStorage.setItem('token', JSON.stringify(response.data.token))
+        verifyUser();
         navigate('/start')
       }
 
