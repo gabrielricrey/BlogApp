@@ -23,13 +23,23 @@ router.get('/myposts', auth, async (req,res) => {
     try {
         const posts = await BlogPost.find({author: id}).populate('author').populate({path: 'comments', populate: 'author'})
 
-        if(posts.length === 0) {
-            return res.status(404).json({message: 'No posts found'})
-        }
-
         res.status(200).json(posts)
     } catch (error) {
         res.status(500).json({error: "Error getting blogposts", errorMessage: error})
+    }
+})
+
+router.get('/user/:id', async (req,res) => {
+    const {id} = req.params
+    try {
+        const posts = await BlogPost.find({author: id})
+        if(!posts) {
+            res.json({message: "No blogposts found"})
+            return
+        }
+        res.status(200).json(posts);
+    } catch(error) {
+        res.status(500).json({error: "Error getting blogpost", errorMessage: error})
     }
 })
 
