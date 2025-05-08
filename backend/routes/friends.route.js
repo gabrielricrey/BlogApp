@@ -89,7 +89,32 @@ router.post('/:id/deny-request/', auth, async (req,res) => {
     }
 })
 
-router.post('/:id/remove-friend/', auth, async (req,res) => {
+router.delete('/:id/cancel-request/', auth, async (req,res) => {
+    const {id} = req.params;
+    const currentUserId = req.user.userId
+
+    try{
+
+        const currentUser = await User.findById(currentUserId);
+        const receiver = await User.findById(id)
+        
+        if(!currentUser.sentRequests.includes(id)) {
+            return res.status(400).json({message: 'No pending friend request'})
+        }
+        
+        currentUser.sentRequests = currentUser.sentRequests.filter((reqId) => reqId.toString() !== id)
+        receiver.friendRequests = receiver.friendRequests.filter((recId) => recId.toString() !== currentUserId);
+        
+        await currentUser.save();
+        await receiver.save();
+        
+        res.status(200).json({message: 'Friend request canceled!'})
+    } catch(error) {
+        res.status(500).json({message: 'Server error' + error})
+    }
+})
+
+router.delete('/:id/remove-friend/', auth, async (req,res) => {
     const {id} = req.params;
     const currentUserId = req.user.userId
 
