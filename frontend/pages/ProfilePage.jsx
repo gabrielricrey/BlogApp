@@ -45,7 +45,7 @@ const ProfilePage = () => {
     }
   }, [id, loggedInUser]);
 
-  if (!user) return <div className="text-center mt-10 text-white">Laddar profil...</div>;
+
 
   return (
     <div className='mt-5'>
@@ -53,7 +53,7 @@ const ProfilePage = () => {
         <div className='bg-blue-950 p-5 relative flex'>
           <img src={thumbnail} alt="" className='rounded-full size-50' />
           <h1 className='p-2 rounded-md absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl'>
-            {user.username}
+            {user && user.username}
           </h1>
 
           {user && loggedInUser && user.username === loggedInUser.username && (
@@ -69,15 +69,15 @@ const ProfilePage = () => {
         <div className='flex justify-center bg-blue-900 p-5'>
           <div className='flex text-center gap-5'>
             <div>
-              <h4 className='text-white'>{user.friends.length}</h4>
+              <h4 className='text-white'>{user && user.friends.length}</h4>
               <h4 className='text-white'>Friends</h4>
             </div>
             <div>
-              <h4 className='text-white'>{user.posts.length}</h4>
+              <h4 className='text-white'>{user && user.posts.length}</h4>
               <h4 className='text-white'>Posts</h4>
             </div>
             <div>
-              <h4 className='text-white'>{user.comments.length}</h4>
+              <h4 className='text-white'>{user && user.comments.length}</h4>
               <h4 className='text-white'>Comments</h4>
             </div>
           </div>
