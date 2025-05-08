@@ -20,7 +20,7 @@ const NotificationContainer = ({show}) => {
         <>
         {show &&
             
-            <div className='border-2 w-md rounded-md right-0 absolute mt-2 h-72 z-3 bg-blue-800'>
+            <div className='border-2 w-sm rounded-md right-2 absolute mt-2 h-72 z-3 bg-blue-800'>
             <ul>
             {friendRequests && friendRequests
                 .map(req => <FriendRequest req={req}/>)}
