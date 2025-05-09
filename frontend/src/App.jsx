@@ -9,11 +9,13 @@ import SearchPage from '../pages/SearchPage';
 import NotificationContainer from '../components/NotificationContainer';
 import { MagnifyingGlassIcon, UserCircleIcon, HomeIcon, BellIcon, PlusIcon} from '@heroicons/react/24/solid';
 import { UserContext } from '../context/UserContext';
+import CreatePostPage from '../pages/CreatePostPage';
 
 
 function App() {
 
   const [showNotifications, setShowNotifications] = useState(false)
+
 
   const {setLoggedInUser} = useContext(UserContext);
 
@@ -35,7 +37,7 @@ function App() {
         <a href="" className='text-white'>BlogApp</a>
         {localStorage.getItem('token') && 
         <ul className='flex justify-between items-center gap-2'>
-          <li><button className='flex items-center justify-center bg-green-600 px-2 rounded-md py-1 border-2 border-green-800 hover:cursor-pointer hover:border-white'>New Post<PlusIcon onClick={() => setShowNotifications(prev => !prev)} className='size-6 text-white bg-green-600 hover:cursor-pointer'/></button></li>
+          <li><button onClick={() => navigate('/create-post')} className='flex items-center justify-center bg-green-600 px-2 rounded-md py-1 border-2 border-green-800 hover:cursor-pointer hover:border-white'>New Post<PlusIcon className='size-6 text-white bg-green-600 hover:cursor-pointer'/></button></li>
           <li><button className='flex items-center justify-center'><BellIcon onClick={() => setShowNotifications(prev => !prev)} className='size-6 text-white hover:cursor-pointer'/></button></li>
           <li><button className='flex items-center justify-center' onClick={() => navigate('/start')}><HomeIcon className='size-6 text-white hover:cursor-pointer'/></button></li>
           <li><button className='flex items-center justify-center' onClick={() => navigate('/profile')}><UserCircleIcon className='size-6 text-white hover:cursor-pointer'/></button></li>
@@ -53,6 +55,7 @@ function App() {
         <Route path='/profile/:id' element={<ProfilePage/>}/>
         <Route path='/register' element={<RegisterPage/>}/>
         <Route path='/search' element={<SearchPage/>}/>
+        <Route path='/create-post' element={<CreatePostPage/>}/>
       </Routes>
     </>
   )
