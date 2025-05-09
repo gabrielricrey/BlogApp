@@ -29,6 +29,7 @@ const FriendOptions = () => {
             console.log(token);
             const response = await axios.post(`http://localhost:3000/friends/${id}/send-request/`, {}, { headers: { Authorization: `Bearer ${token}` } })
             console.log(response)
+            setPendingRequest(true);
         } catch (error) {
             console.log(error)
         }
