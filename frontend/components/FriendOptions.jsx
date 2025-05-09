@@ -65,6 +65,7 @@ const FriendOptions = () => {
             console.log(token);
             const response = await axios.delete(`http://localhost:3000/friends/${id}/cancel-request/`, { headers: { Authorization: `Bearer ${token}` } })
             console.log(response)
+            setPendingRequest(false);
         } catch (error) {
             console.log(error)
         }
