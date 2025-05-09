@@ -5,7 +5,7 @@ import {auth} from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.get('/', async (req,res) => {
+router.get('/', auth, async (req,res) => {
     try {
         const blogposts = await BlogPost.find().populate('author').populate({path: 'comments', populate: 'author'})
         if(!blogposts) {
