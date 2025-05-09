@@ -1,6 +1,7 @@
 import { React, useState } from 'react'
 import { HandThumbUpIcon, ChatBubbleBottomCenterIcon, PaperAirplaneIcon } from '@heroicons/react/24/solid'
 import Comments from './Comments';
+import { Link } from 'react-router-dom';
 
 
 const Post = ({ post }) => {
@@ -11,8 +12,9 @@ const Post = ({ post }) => {
     return (
 
 
-        <li key={post._id} className='bg-blue-900 p-2 border-2 rounded-md relative'>
-            <h4 className='absolute top-0 right-0 text-white'>Posted by: {post.author.username}</h4>
+        <li key={post._id} className='bg-blue-900 p-4 rounded-md relative w-3xl'>
+            <h4 className='absolute top-4 right-4 text-white'><Link to={`/profile/${post.author._id}`} className='hover:text-black'>{post.author.username}</Link>
+            </h4>
             <h2 className='text-white underline'>{post.title}</h2>
             <p>{post.content}</p>
 
