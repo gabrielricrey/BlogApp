@@ -3,6 +3,7 @@ import { UserContext } from '../context/UserContext'
 
 import FriendRequest from './FriendRequest'
 
+
 const NotificationContainer = ({show}) => {
 
     const [friendRequests, setFriendRequests] = useState(null)
@@ -23,7 +24,9 @@ const NotificationContainer = ({show}) => {
             <div className='border-2 w-sm rounded-md right-2 absolute mt-2 h-72 z-3 bg-blue-800'>
             <ul>
             {friendRequests && friendRequests
-                .map(req => <FriendRequest req={req}/>)}
+                .map(req => <FriendRequest req={req}/>)
+            }
+            {friendRequests.length == 0 && <li>No New Notifications!</li>}
             </ul>
             </div>
         }
