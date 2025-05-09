@@ -48,6 +48,7 @@ const FriendOptions = () => {
             console.log(token);
             const response = await axios.delete(`http://localhost:3000/friends/${id}/remove-friend/`, { headers: { Authorization: `Bearer ${token}` } })
             console.log(response)
+            setFriends(false)
         } catch (error) {
             console.log(error)
         }
