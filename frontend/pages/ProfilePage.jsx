@@ -87,7 +87,7 @@ const ProfilePage = () => {
 
   return (
     <div className='mt-5'>
-      <div className='border-2 border-black rounded-md m-auto shrink-0 max-w-5xl'>
+      <div className='border-0 rounded-md m-auto shrink-0 max-w-5xl'>
         <div className='bg-blue-950 p-5 relative flex'>
           <img src={thumbnail} alt="" className='rounded-full size-50' />
           <h1 className='p-2 rounded-md absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl'>
@@ -121,7 +121,9 @@ const ProfilePage = () => {
           </div>
         </div>
         <ul>
-          {posts && posts.map(post => <Post post={post}/>)}
+          {posts && posts
+          .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+          .map(post => <Post post={post}/>)}
         </ul>
       </div>
     </div>
