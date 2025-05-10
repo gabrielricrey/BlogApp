@@ -44,7 +44,7 @@ router.get('/myposts', auth, async (req, res) => {
 router.get('/user/:id', async (req, res) => {
     const { id } = req.params
     try {
-        const posts = await BlogPost.find({ author: id })
+        const posts = await BlogPost.find({ author: id }).populate('author').populate({ path: 'comments', populate: 'author' })
         if (!posts) {
             res.json({ message: "No blogposts found" })
             return
