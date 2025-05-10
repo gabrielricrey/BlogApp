@@ -29,7 +29,6 @@ export const PostsProvider = ({ children }) => {
 
   }
 
-  useEffect(() => {
     const fetchPosts = async () => {
       if (!localStorage.getItem('token')) return;
 
@@ -45,11 +44,8 @@ export const PostsProvider = ({ children }) => {
       }
     };
 
-    fetchPosts();
-  }, [posts]);
-
   return (
-    <PostsContext.Provider value={{ posts, loading, addPost }}>
+    <PostsContext.Provider value={{ posts, loading, addPost, fetchPosts }}>
       {children}
     </PostsContext.Provider>
   );
