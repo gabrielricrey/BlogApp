@@ -6,13 +6,16 @@ import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import FriendOptions from '../components/FriendOptions';
 import Post from '../components/Post'
+import Friends from '../components/Friends';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState(null)
   const { id } = useParams();
-  const navigate = useNavigate();
   const { loggedInUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const [togglePostsAndFriends, setTogglePostsAndFriends] = useState(true);
 
   useEffect(() => {
     async function getUserInfo() {
@@ -82,9 +85,6 @@ const ProfilePage = () => {
     }
   }
 
-
-
-
   return (
     <div className='mt-5'>
       <div className='border-0 rounded-md m-auto shrink-0 max-w-5xl'>
@@ -120,10 +120,15 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
+        <div className='w-full flex bg-blue-900 text-white border'>
+            <button onClick={() => setTogglePostsAndFriends(true)} className='w-full hover:cursor-pointer p-2 border-r'>Posts</button>
+            <button onClick={() => setTogglePostsAndFriends(false)} className='w-full hover:cursor-pointer p-2'>Friends</button>
+        </div>
         <ul>
-          {posts && posts
+          {posts && togglePostsAndFriends && posts
           .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
           .map(post => <Post post={post}/>)}
+          {!togglePostsAndFriends && <Friends/>}
         </ul>
       </div>
     </div>
