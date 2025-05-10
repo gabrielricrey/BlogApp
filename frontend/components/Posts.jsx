@@ -11,7 +11,7 @@ const Posts = () => {
     
 
   return (
-      <ul className='flex flex-col gap-1 w-xl'>
+      <ul className='flex flex-col gap-1 w-full'>
         {posts && posts
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .map((post) => (
