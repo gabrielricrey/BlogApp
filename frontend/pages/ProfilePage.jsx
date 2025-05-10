@@ -124,7 +124,7 @@ const ProfilePage = () => {
             <button onClick={() => setTogglePostsAndFriends(true)} className='w-full hover:cursor-pointer p-2 border-r'>Posts</button>
             <button onClick={() => setTogglePostsAndFriends(false)} className='w-full hover:cursor-pointer p-2'>Friends</button>
         </div>
-        <ul>
+        <ul className='bg-blue-900'>
           {posts && togglePostsAndFriends && posts
           .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
           .map(post => <Post post={post}/>)}
