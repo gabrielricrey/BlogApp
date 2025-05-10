@@ -12,7 +12,7 @@ const Post = ({ post }) => {
     return (
 
 
-        <li key={post._id} className='bg-blue-900 p-4 rounded-md relative w-3xl'>
+        <li key={post._id} className='bg-blue-900 p-4 rounded-md relative w-full'>
             <h4 className='absolute top-4 right-4 text-white'><Link to={`/profile/${post.author._id}`} className='hover:text-black'>{post.author.username}</Link>
             </h4>
             <h2 className='text-white underline'>{post.title}</h2>
