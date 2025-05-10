@@ -1,6 +1,7 @@
 import express from 'express';
 import User from '../models/user.model.js';
 import { auth } from '../middleware/auth.js';
+import mongoose from 'mongoose';
 
 const router = express.Router()
 
@@ -142,6 +143,24 @@ router.delete('/:id/remove-friend/', auth, async (req,res) => {
 
 router.get('/', auth, async(req,res) => {
     const id = req.user.userId
+    try {
+        const user = await User.findById(id).populate('friends', 'username')
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json(user.friends);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' + error});
+    }
+})
+
+router.get('/user/:id', auth, async(req,res) => {
+    const {id} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.json({message: 'Invalid Id'});
+    }
+
     try {
         const user = await User.findById(id).populate('friends', 'username')
         if (!user) {
