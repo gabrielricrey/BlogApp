@@ -18,7 +18,7 @@ const StartPage = () => {
   }, [])
 
   return (
-    <div className='w-[100] h-screen flex flex-col justify-center items-center'>
+    <div className='w-full flex flex-col justify-center items-center mt-5'>
     <Posts/>
     </div>
   )
