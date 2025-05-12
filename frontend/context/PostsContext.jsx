@@ -36,7 +36,7 @@ export const PostsProvider = ({ children }) => {
 
       try {
         const response = await axios.get("http://localhost:3000/api/blogpost/byfriends", { headers: { Authorization: `Bearer ${token}` } });
-        setPosts(response.data);
+        setPosts(response.data.posts);
       } catch (error) {
         console.error("Error fetching posts:", error);
       } finally {
