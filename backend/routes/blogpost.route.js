@@ -6,29 +6,30 @@ import { auth } from '../middleware/auth.js';
 const router = express.Router();
 
 router.get('/byfriends', auth, async (req, res) => {
-
-    const user = await User.findById(req.user.userId).populate('friends');
-
-    if (!user) {
-        return res.status(404).json({ message: "User not found" });
-    }
-    if (user.friends.length === 0) {
-        return res.status(200).json({ message: "User has no friends" });
-    }
-
-    const friendsIds = user.friends.map(friend => friend._id)
-
     try {
-        const blogposts = await BlogPost.find({ author: { $in: friendsIds } }).populate('author').populate({ path: 'comments', populate: 'author' })
+        const user = await User.findById(req.user.userId).populate('friends');
 
-        if (blogposts.length === 0) {
-            return res.status(200).json({ message: "No blogposts from friends found" });
+        if (!user) {
+            return res.status(404).json({ posts: [], message: "User not found" });
         }
-        return res.status(200).json(blogposts);
+
+        if (user.friends.length === 0) {
+            return res.status(200).json({ posts: [], message: "User has no friends" });
+        }
+
+        const friendsIds = user.friends.map(friend => friend._id);
+
+        const blogposts = await BlogPost.find({ author: { $in: friendsIds } })
+            .populate('author')
+            .populate({ path: 'comments', populate: 'author' });
+
+        return res.status(200).json({ posts: blogposts, message: blogposts.length === 0 ? "No blogposts from friends found" : undefined });
+
     } catch (error) {
-        return res.status(500).json({ error: "Error getting blogposts", errorMessage: error })
+        return res.status(500).json({ posts: [], message: "Error getting blogposts", errorMessage: error.message });
     }
-})
+});
+
 
 router.get('/myposts', auth, async (req, res) => {
     const id = req.user.userId
