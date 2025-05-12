@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
-import { PostsContext } from '../context/PostsContext';
+
 
 
 const LoginPage = () => {
@@ -13,7 +13,7 @@ const LoginPage = () => {
     let navigate = useNavigate();
 
     const {verifyUser} = useContext(UserContext);
-    const {fetchPosts} = useContext(PostsContext);
+
     
 
     useEffect(() => {
@@ -29,7 +29,6 @@ const LoginPage = () => {
       if(response.data.token) {
         localStorage.setItem('token', JSON.stringify(response.data.token))
         verifyUser();
-        await fetchPosts();
         navigate('/start')
       }
 
