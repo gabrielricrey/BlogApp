@@ -8,6 +8,10 @@ const Post = ({ post }) => {
 
     const [showComments, setShowComments] = useState(false);
 
+    const addLike = async () => {
+        
+    }
+
 
     return (
 
@@ -21,7 +25,7 @@ const Post = ({ post }) => {
 
             <div className='flex mt-2 items-center justify-between'>
                 <div className="flex items-center gap-0.5">
-                    <button className='p-0.5 border-2 rounded-md hover:border-white hover:cursor-pointer'><HandThumbUpIcon className='size-6 text-blue-500' /></button>
+                    <button onClick={addLike} className='p-0.5 border-2 rounded-md hover:border-white hover:cursor-pointer'><HandThumbUpIcon className='size-6 text-blue-500' /></button>
                     <p className='text-white'>{post.likes}</p>
                     <button onClick={() => setShowComments(!showComments)} className='p-0.5 border-2 rounded-md hover:border-white hover:cursor-pointer'><ChatBubbleBottomCenterIcon className='size-6 text-blue-500' /></button>
                     <p className='text-white'>{post.comments.length}</p>
