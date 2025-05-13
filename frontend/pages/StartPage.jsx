@@ -23,7 +23,10 @@ const StartPage = () => {
   }, [])
 
   return (
-    <div className='w-full flex flex-col justify-center items-center mt-5'>
+    <div className='w-full sm:w-[calc(100%-250px)] sm:ml-[250px]'>
+      <div className='h-[70px] border-b-1 flex items-center'>
+        <h1 className='text-white ml-6'>Home</h1>
+      </div>
     <Posts/>
     </div>
   )
