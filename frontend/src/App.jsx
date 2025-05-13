@@ -1,13 +1,13 @@
 import { useState, useContext } from 'react'
 import './App.css'
-import {Routes,Route, useNavigate} from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
 import StartPage from '../pages/StartPage';
 import RegisterPage from '../pages/RegisterPage';
 import ProfilePage from '../pages/ProfilePage'
 import SearchPage from '../pages/SearchPage';
 import NotificationContainer from '../components/NotificationContainer';
-import { MagnifyingGlassIcon, UserCircleIcon, HomeIcon, BellIcon, PlusIcon} from '@heroicons/react/24/solid';
+import { MagnifyingGlassIcon, UserCircleIcon, HomeIcon, BellIcon, PlusIcon } from '@heroicons/react/24/solid';
 import { UserContext } from '../context/UserContext';
 import CreatePostPage from '../pages/CreatePostPage';
 
@@ -17,12 +17,12 @@ function App() {
   const [showNotifications, setShowNotifications] = useState(false)
 
 
-  const {setLoggedInUser} = useContext(UserContext);
+  const { setLoggedInUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
   const signOut = () => {
-    if(localStorage.getItem('token')) {
+    if (localStorage.getItem('token')) {
       localStorage.removeItem('token');
       setLoggedInUser(null);
       navigate('/')
@@ -33,29 +33,58 @@ function App() {
 
   return (
     <>
-      <nav className="w-[100] bg-blue-900 flex justify-between p-2 items-center">
-        <a href="" className='text-white'>BlogApp</a>
-        {localStorage.getItem('token') && 
-        <ul className='flex justify-between items-center gap-2'>
-          <li><button onClick={() => navigate('/create-post')} className='flex items-center justify-center bg-green-600 px-2 rounded-md py-1 border-2 border-green-800 hover:cursor-pointer hover:border-white'>New Post<PlusIcon className='size-6 text-white bg-green-600 hover:cursor-pointer'/></button></li>
-          <li><button className='flex items-center justify-center'><BellIcon onClick={() => setShowNotifications(prev => !prev)} className='size-6 text-white hover:cursor-pointer'/></button></li>
-          <li><button className='flex items-center justify-center' onClick={() => navigate('/start')}><HomeIcon className='size-6 text-white hover:cursor-pointer'/></button></li>
-          <li><button className='flex items-center justify-center' onClick={() => navigate('/profile')}><UserCircleIcon className='size-6 text-white hover:cursor-pointer'/></button></li>
-          <li><button className='flex items-center justify-center' onClick={() => navigate('/search')}><MagnifyingGlassIcon className='size-6 text-white hover:cursor-pointer'/></button></li>
-          <li><button onClick={signOut} className='bg-blue-950 text-white px-2 py-1 rounded-md border-2 border-black hover:cursor-pointer hover:border-white'>Sign Out</button></li>
-          
-        </ul>
+      <nav className="w-full sm:w-[250px] sm:border-r-1 bg-blue-900 flex sm:flex-col p-2 items-center fixed sm:top-0 sm:left-0 bottom-0 justify-around sm:justify-start h-[60px] sm:h-screen">
+
+        <a href="" className='text-white hidden sm:inline'>BlogApp</a>
+        {localStorage.getItem('token') &&
+          <ul className="w-full sm:ml-5 flex flex-row justify-around sm:flex-col items-center sm:items-start gap-4 mt-0 sm:mt-8 text-white">
+
+            <li className='order-1 sm:order-none'>
+              <button className='flex items-center justify-center hover:cursor-pointer gap-2' onClick={() => navigate('/start')}>
+                <HomeIcon className='size-7' />
+                <p className="hidden md:inline">Home</p>
+              </button>
+            </li>
+            <li className='order-2 sm:order-none'>
+              <button className='flex items-center justify-center hover:cursor-pointer gap-2' onClick={() => navigate('/search')}>
+                <MagnifyingGlassIcon className='size-7 ' />
+                <p className="hidden md:inline">Search</p>
+              </button>
+            </li>
+            <li className='order-4 sm:order-none'>
+              <button onClick={() => setShowNotifications(prev => !prev)} className='flex items-center justify-center hover:cursor-pointer gap-2'>
+                <BellIcon className='size-7' />
+                <p className="hidden md:inline">Notifications</p>
+              </button>
+            </li>
+            <li className='order-3 sm:order-none'>
+              <button onClick={() => navigate('/create-post')} className='flex items-center justify-center hover:cursor-pointer hover:border-white gap-2'>
+                <PlusIcon className='size-7 ' />
+                <p className="hidden md:inline">Create</p>
+              </button>
+            </li>
+            <li className='order-5 sm:order-none'>
+              <button className='flex items-center justify-center hover:cursor-pointer gap-2' onClick={() => navigate('/profile')}>
+                <UserCircleIcon className='size-7' />
+                <p className="hidden md:inline">Profile</p>
+              </button>
+            </li>
+
+          </ul>
+
+
         }
+        <button onClick={signOut} className='hidden sm:inline bg-blue-950 text-white px-2 py-1 rounded-md border-2 border-black hover:cursor-pointer hover:border-white fixed bottom-4'>Sign Out</button>
       </nav>
-      <NotificationContainer show={showNotifications}/>
+      <NotificationContainer show={showNotifications} />
       <Routes>
-        <Route path='/' element={<LoginPage/>}/>
-        <Route path='/start' element={<StartPage/>}/>
-        <Route path='/profile' element={<ProfilePage/>}/>
-        <Route path='/profile/:id' element={<ProfilePage/>}/>
-        <Route path='/register' element={<RegisterPage/>}/>
-        <Route path='/search' element={<SearchPage/>}/>
-        <Route path='/create-post' element={<CreatePostPage/>}/>
+        <Route path='/' element={<LoginPage />} />
+        <Route path='/start' element={<StartPage />} />
+        <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/profile/:id' element={<ProfilePage />} />
+        <Route path='/register' element={<RegisterPage />} />
+        <Route path='/search' element={<SearchPage />} />
+        <Route path='/create-post' element={<CreatePostPage />} />
       </Routes>
     </>
   )
