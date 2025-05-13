@@ -86,9 +86,12 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className='mt-5'>
+    <div className='md:ml-[250px]'>
+      <div className='h-[70px] border-b-1 flex items-center'>
+        <h1 className='text-white ml-6'>Profile</h1>
+      </div>
       <div className='border-0 rounded-md m-auto shrink-0 max-w-5xl'>
-        <div className='bg-blue-950 p-5 relative flex'>
+        <div className=' p-5 relative flex'>
           <img src={thumbnail} alt="" className='rounded-full size-50' />
           <h1 className='p-2 rounded-md absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl'>
             {user && user.username}
@@ -120,11 +123,11 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-        <div className='w-full flex bg-blue-900 text-white border'>
-            <button onClick={() => setTogglePostsAndFriends(true)} className='w-full hover:cursor-pointer p-2 border-r'>Posts</button>
+        <div className='w-full flex bg-blue-900 text-white'>
+            <button onClick={() => setTogglePostsAndFriends(true)} className='w-full hover:cursor-pointer p-2 border-b'>Posts</button>
             <button onClick={() => setTogglePostsAndFriends(false)} className='w-full hover:cursor-pointer p-2'>Friends</button>
         </div>
-        <ul className='bg-blue-900'>
+        <ul className='border-1 rounded-md mt-5'>
           {posts && togglePostsAndFriends && posts
           .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
           .map(post => <Post post={post}/>)}

@@ -27,11 +27,11 @@ const Post = ({ post }) => {
     return (
 
 
-        <li key={post._id} className='bg-blue-900 p-4 rounded-md relative w-full'>
+        <li key={post._id} className='p-4 rounded-md relative w-full shadow-xl'>
             <h4 className='absolute top-4 right-4 text-white'><Link to={`/profile/${post.author._id}`} className='hover:text-black'>{post.author.username}</Link>
             </h4>
-            <h2 className='text-white underline'>{post.title}</h2>
-            <p>{post.content}</p>
+            <h2 className='text-white text-2xl underline'>{post.title}</h2>
+            <p className='mt-3 text-md text-white'>{post.content}</p>
 
 
             <div className='flex mt-2 items-center justify-between'>

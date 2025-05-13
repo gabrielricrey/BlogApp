@@ -35,7 +35,7 @@ function App() {
     <>
       <nav className="w-full sm:w-[250px] sm:border-r-1 bg-blue-900 flex sm:flex-col p-2 items-center fixed sm:top-0 sm:left-0 bottom-0 justify-around sm:justify-start h-[60px] sm:h-screen">
 
-        <a href="" className='text-white hidden sm:inline'>BlogApp</a>
+        <a href="" className='text-white hidden sm:inline mt-2'>BlogApp</a>
         {localStorage.getItem('token') &&
           <ul className="w-full sm:ml-5 flex flex-row justify-around sm:flex-col items-center sm:items-start gap-4 mt-0 sm:mt-8 text-white">
 
