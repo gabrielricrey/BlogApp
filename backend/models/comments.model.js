@@ -11,6 +11,11 @@ const commentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    post: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'BlogPost',
+        required: true
     }
 },{timestamps: true})
 
