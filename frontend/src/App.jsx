@@ -9,7 +9,7 @@ import SearchPage from '../pages/SearchPage';
 import NotificationContainer from '../components/NotificationContainer';
 import { MagnifyingGlassIcon, UserCircleIcon, HomeIcon, BellIcon, PlusIcon } from '@heroicons/react/24/solid';
 import { UserContext } from '../context/UserContext';
-import CreatePostPage from '../pages/CreatePostPage';
+import CreateOrEditPostPage from '../pages/CreateOrEditPostPage';
 
 
 function App() {
@@ -85,7 +85,8 @@ function App() {
         <Route path='/profile/:id' element={<ProfilePage />} />
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/search' element={<SearchPage />} />
-        <Route path='/create-post' element={<CreatePostPage />} />
+        <Route path='/create-post' element={<CreateOrEditPostPage />} />
+        <Route path='/edit-post/:id' element={<CreateOrEditPostPage />} />
       </Routes>
     </>
   )
