@@ -88,19 +88,23 @@ router.delete('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     const { id } = req.params
-    const body = req.body;
+    const { title, content } = req.body;
 
-    if (!body.title || !body.content || !body.author) {
-        res.json({ error: "Title, content, author required" })
-        return;
+    if (!title || !content) {
+        return res.status(400).json({ error: "Title, content, author required" });
     }
 
-    const blogpost = await BlogPost.findByIdAndUpdate(id, { $set: body }, { new: true })
-    if (!blogpost) {
-        res.status(404).json({ error: "No post with matching id found" })
-        return;
+    try {
+
+        const blogpost = await BlogPost.findByIdAndUpdate(id, { $set: { title, content } }, { new: true })
+        if (!blogpost) {
+            return res.status(404).json({ error: "No post with matching id found" });
+        }
+        res.status(200).json({ success: true, updatedPost: blogpost });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ success: false, message: 'Server error, try again later' })
     }
-    res.status(200).json(blogpost);
 })
 
 router.post('/', auth, async (req, res) => {
