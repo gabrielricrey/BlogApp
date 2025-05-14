@@ -1,6 +1,7 @@
 import express from 'express';
 import BlogPost from '../models/blogpost.model.js';
 import User from '../models/user.model.js';
+import Comment from '../models/comments.model.js';
 import { auth } from '../middleware/auth.js';
 
 const router = express.Router();
