@@ -17,11 +17,20 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    friends: [{
+    private : {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    followers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
-    friendRequests: [{
+    following: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    followRequests: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],

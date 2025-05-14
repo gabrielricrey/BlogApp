@@ -8,23 +8,23 @@ const router = express.Router();
 
 router.get('/byfriends', auth, async (req, res) => {
     try {
-        const user = await User.findById(req.user.userId).populate('friends');
+        const user = await User.findById(req.user.userId).populate('following');
 
         if (!user) {
             return res.status(404).json({ posts: [], message: "User not found" });
         }
 
-        if (user.friends.length === 0) {
-            return res.status(200).json({ posts: [], message: "User has no friends" });
+        if (user.following.length === 0) {
+            return res.status(200).json({ posts: [], message: "User follows no one" });
         }
 
-        const friendsIds = user.friends.map(friend => friend._id);
+        const followingIds = user.following.map(follow => follow._id);
 
-        const blogposts = await BlogPost.find({ author: { $in: friendsIds } })
+        const blogposts = await BlogPost.find({ author: { $in: followingIds } })
             .populate('author')
             .populate({ path: 'comments', populate: 'author' });
 
-        return res.status(200).json({ posts: blogposts, message: blogposts.length === 0 ? "No blogposts from friends found" : undefined });
+        return res.status(200).json({ posts: blogposts, message: blogposts.length === 0 ? "No blogposts from following found" : undefined });
 
     } catch (error) {
         return res.status(500).json({ posts: [], message: "Error getting blogposts", errorMessage: error.message });

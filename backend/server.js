@@ -6,7 +6,7 @@ import blogPostRouter from './routes/blogpost.route.js';
 import userRouter from './routes/user.route.js'
 import loginRouter from './routes/login.route.js'
 import authRouter from './routes/auth.route.js'
-import friendsRouter from './routes/friends.route.js';
+import followersRouter from './routes/followers.route.js';
 import commentsRouter from './routes/comments.route.js'
 import likesRouter from './routes/likes.route.js'
 
@@ -22,7 +22,7 @@ app.use('/api/blogpost', blogPostRouter)
 app.use('/api/users', userRouter)
 app.use('/login', loginRouter)
 app.use('/auth/verify', authRouter)
-app.use('/friends',friendsRouter);
+app.use('/followers',followersRouter);
 app.use('/comments', commentsRouter)
 app.use('/likes', likesRouter)
 

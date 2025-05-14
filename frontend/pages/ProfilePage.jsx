@@ -4,9 +4,9 @@ import { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
-import FriendOptions from '../components/FriendOptions';
+import FollowOptions from '../components/FollowOptions';
 import Post from '../components/Post'
-import Friends from '../components/Friends';
+import Followers from '../components/Followers';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -103,15 +103,15 @@ const ProfilePage = () => {
             </button>
           )}
           {user && loggedInUser && user.username !== loggedInUser.username && (
-            <FriendOptions />
+            <FollowOptions />
           )}
         </div>
 
         <div className='flex justify-center bg-blue-900 p-5'>
           <div className='flex text-center gap-5'>
             <div>
-              <h4 className='text-white'>{user && user.friends.length}</h4>
-              <h4 className='text-white'>Friends</h4>
+              <h4 className='text-white'>{user && user.followers.length}</h4>
+              <h4 className='text-white'>Followers</h4>
             </div>
             <div>
               <h4 className='text-white'>{user && user.posts.length}</h4>
@@ -125,13 +125,13 @@ const ProfilePage = () => {
         </div>
         <div className='w-full flex bg-blue-900 text-white'>
             <button onClick={() => setTogglePostsAndFriends(true)} className='w-full hover:cursor-pointer p-2 border-b'>Posts</button>
-            <button onClick={() => setTogglePostsAndFriends(false)} className='w-full hover:cursor-pointer p-2'>Friends</button>
+            <button onClick={() => setTogglePostsAndFriends(false)} className='w-full hover:cursor-pointer p-2'>Followers</button>
         </div>
         <ul className='border-1 rounded-md mt-5'>
           {posts && togglePostsAndFriends && posts
           .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
           .map(post => <Post post={post}/>)}
-          {!togglePostsAndFriends && <Friends/>}
+          {!togglePostsAndFriends && <Followers/>}
         </ul>
       </div>
     </div>

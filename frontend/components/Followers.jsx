@@ -2,16 +2,16 @@ import {React, useState, useEffect} from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const Friends = () => {
+const Followers = () => {
 
-const [friends,setFriends] = useState(null);
+const [followers,setFollowers] = useState(null);
 
 const navigate = useNavigate();
 const {id} = useParams();
 
 useEffect(() => {
 
-    const getFriends = async () => {
+    const getFollowers = async () => {
 
         
         if(!localStorage.getItem('token')) {
@@ -19,32 +19,32 @@ useEffect(() => {
         }
         
         const token = JSON.parse(localStorage.getItem('token'));
-        let endpoint = "http://localhost:3000/friends";
+        let endpoint = "http://localhost:3000/followers";
 
         if(id)
 
-            endpoint = `http://localhost:3000/friends/user/${id}`
+            endpoint = `http://localhost:3000/followers/user/${id}`
         
         try {
             const response = await axios.get(endpoint,{headers: {Authorization: `Bearer ${token}`}})
             console.log(response);
-            setFriends(response.data)
+            setFollowers(response.data)
         } catch (error) {
-            console.log('Error fetching friends:' + error.message)
+            console.log('Error fetching followers:' + error.message)
         }
         
     }
 
-    getFriends();
+    getFollowers();
 
 
 },[id])
 
   return (
     <>
-        {friends && friends.map((friend,i) => <li key={i} className='w-full p-5 bg-blue-900 text-white'><Link to={`/profile/${friend._id}`}>{friend.username}</Link></li>)}
+        {followers && followers.map((follower,i) => <li key={i} className='w-full p-5 bg-blue-900 text-white'><Link to={`/profile/${follower._id}`}>{follower.username}</Link></li>)}
     </>
   )
 }
 
-export default Friends
+export default Followers;

@@ -4,7 +4,7 @@ import axios from 'axios'
 import { UserContext } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 
-const FriendRequest = ({req}) => {
+const FollowRequest = ({req}) => {
 
     const {loggedInUser} = useContext(UserContext);
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ const FriendRequest = ({req}) => {
         const token = JSON.parse(localStorage.getItem('token'));
 
         try {
-            const response = await axios.post(`http://localhost:3000/friends/${id}/accept-request`,{},{headers: {Authorization: `Bearer ${token}`}})
+            const response = await axios.post(`http://localhost:3000/followers/${id}/accept-request`,{},{headers: {Authorization: `Bearer ${token}`}})
             console.log(response);
         } catch (error) {
             console.log('Error:' + error.message)
@@ -37,7 +37,7 @@ const FriendRequest = ({req}) => {
         const token = JSON.parse(localStorage.getItem('token'));
 
         try {
-            const response = await axios.post(`http://localhost:3000/friends/${id}/deny-request`,{},{headers: {Authorization: `Bearer ${token}`}})
+            const response = await axios.post(`http://localhost:3000/followers/${id}/deny-request`,{},{headers: {Authorization: `Bearer ${token}`}})
             console.log(response);
         } catch (error) {
             console.log('Error:' + error.message)
@@ -51,4 +51,4 @@ const FriendRequest = ({req}) => {
     )
 }
 
-export default FriendRequest
+export default FollowRequest

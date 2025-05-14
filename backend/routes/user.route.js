@@ -27,7 +27,7 @@ router.post('/register', async (req, res) => {
 
 router.get('/me', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId).select('-password -_id').populate('friendRequests', 'username')
+    const user = await User.findById(req.user.userId).select('-password -_id').populate('followRequests', 'username')
 
     res.status(200).json(user);
   } catch (err) {
