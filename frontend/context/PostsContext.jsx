@@ -23,6 +23,30 @@ export const PostsProvider = ({ children }) => {
       console.log(response.data)
 
       setPosts((prevPosts) => [...prevPosts, response.data.post])
+      return response.data;
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
+
+  }
+
+  async function editPost(post) {
+    const token = JSON.parse(localStorage.getItem('token'))
+
+    if (!token) {
+      console.log('No token found')
+      return
+    }
+
+    const id = post.id;
+    delete post.id
+
+
+    try {
+      const response = await axios.put(`http://localhost:3000/api/blogpost/${id}`, { ...post }, { headers: { Authorization: `Bearer ${token}` } })
+      console.log(response.data)
+      return response.data;
+
     } catch (error) {
       console.error("Error creating post:", error);
     }
@@ -45,7 +69,7 @@ export const PostsProvider = ({ children }) => {
     };
 
   return (
-    <PostsContext.Provider value={{ posts, loading, addPost, fetchPosts }}>
+    <PostsContext.Provider value={{ posts, loading, addPost, editPost ,fetchPosts }}>
       {children}
     </PostsContext.Provider>
   );
