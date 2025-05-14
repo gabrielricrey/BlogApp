@@ -10,6 +10,7 @@ import NotificationContainer from '../components/NotificationContainer';
 import { MagnifyingGlassIcon, UserCircleIcon, HomeIcon, BellIcon, PlusIcon } from '@heroicons/react/24/solid';
 import { UserContext } from '../context/UserContext';
 import CreateOrEditPostPage from '../pages/CreateOrEditPostPage';
+import { Toaster } from 'react-hot-toast';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <>
+    <Toaster position="top-center" />
     {localStorage.getItem('token') &&
       <nav className="w-full sm:w-[250px] sm:border-r-1 bg-blue-900 flex sm:flex-col p-2 items-center fixed sm:top-0 sm:left-0 bottom-0 justify-around sm:justify-start h-[60px] sm:h-screen">
 
