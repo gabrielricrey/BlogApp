@@ -42,7 +42,7 @@ router.get('/myposts', auth, async (req, res) => {
     }
 })
 
-router.get('/user/:id', async (req, res) => {
+router.get('/user/:id', auth, async (req, res) => {
     const { id } = req.params
     try {
         const posts = await BlogPost.find({ author: id }).populate('author').populate({ path: 'comments', populate: 'author' })
@@ -56,7 +56,7 @@ router.get('/user/:id', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', auth,async (req, res) => {
     const { id } = req.params
     try {
         const blogpost = await BlogPost.findById(id)
@@ -72,21 +72,25 @@ router.get('/:id', async (req, res) => {
 
 
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     const { id } = req.params
     try {
         const blogpost = await BlogPost.findByIdAndDelete(id)
         if (!blogpost) {
-            res.json({ message: "No blogpost found with this id" })
-            return
+            return res.status(400).json({ message: "No blogpost found with this id" });
         }
-        res.status(200).json({ message: "Succesfully deleted" });
+
+        await User.findByIdAndUpdate(req.user.userId, { $pull: { posts: id } });
+        await Comment.deleteMany({ post: id });
+
+        return res.status(200).json({ success: true, message: "Succesfully deleted" });
     } catch (error) {
-        res.status(500).json({ error: "Error deleting blogpost", errorMessage: error })
+        console.error(error);
+        return res.status(500).json({ success: false, message: error.message });
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const { id } = req.params
     const { title, content } = req.body;
 
