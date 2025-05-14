@@ -3,6 +3,7 @@ import { HandThumbUpIcon, ChatBubbleBottomCenterIcon, PaperAirplaneIcon, Ellipsi
 import Comments from './Comments';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import PostOptions from './PostOptions';
 
 
 const Post = ({ post }) => {
@@ -34,19 +35,7 @@ const Post = ({ post }) => {
                 <EllipsisHorizontalIcon className='absolute top-4 right-4 z-10 text-white size-6' />
             </button>
             {showPostOptions &&
-                <div className='fixed inset-0 flex items-center justify-center bg-black/30 z-20'>
-                    <div className='w-full max-w-sm rounded-md border-1 flex flex-col items-center p-2 gap-2 bg-blue-900 text-white'>
-                        <button className='flex'>
-                            <p>Edit</p>
-                        </button>
-                        <button className='flex'>
-                            <p>Delete</p>
-                        </button>
-                        <button onClick={() => setShowPostOptions(!showPostOptions)} className='flex'>
-                            <p>Exit</p>
-                        </button>
-                    </div>
-                </div>
+                <PostOptions setShowPostOptions={setShowPostOptions} post={post}/>
             }
 
 
