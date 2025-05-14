@@ -53,6 +53,25 @@ export const PostsProvider = ({ children }) => {
 
   }
 
+  async function deletePost(id) {
+    const token = JSON.parse(localStorage.getItem('token'))
+
+    if (!token) {
+      console.log('No token found')
+      return
+    }
+
+    try {
+      const response = await axios.delete(`http://localhost:3000/api/blogpost/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+      console.log(response.data)
+      return response.data;
+
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+
+  }
+
     const fetchPosts = async () => {
       if (!localStorage.getItem('token')) return;
 
@@ -69,7 +88,7 @@ export const PostsProvider = ({ children }) => {
     };
 
   return (
-    <PostsContext.Provider value={{ posts, loading, addPost, editPost ,fetchPosts }}>
+    <PostsContext.Provider value={{ posts, loading, addPost, editPost, deletePost ,fetchPosts }}>
       {children}
     </PostsContext.Provider>
   );
