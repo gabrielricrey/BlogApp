@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useContext } from 'react';
 import { PostsContext } from '../context/PostsContext';
 import { useLocation } from 'react-router-dom';
-import { Toaster, toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 
 const CreateOrEditPost = ({editMode,setEditMode}) => {
@@ -46,14 +46,15 @@ const CreateOrEditPost = ({editMode,setEditMode}) => {
 
 
   return (
+    <>
     <div>
-      <Toaster position="top-center" />
       <div className='flex flex-col items-center'>
         <input type="text" placeholder='Title' onChange={(e) => setTitle(e.target.value)} value={title} className='bg-white rounded-md p-2 mt-2 w-100'/>
         <textarea placeholder='Content' onChange={(e) => setContent(e.target.value)} value={content} className='bg-white rounded-md p-2 m-2 w-100'></textarea>
         <button type='submit' onClick={handleSubmit} className='bg-blue-950 text-white w-[100px] rounded-md py-1 hover:bg-blue-300 hover:cursor-pointer'>Submit</button>
       </div>
     </div>
+    </>
   )
 }
 
