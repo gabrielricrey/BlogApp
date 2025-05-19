@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        match: [/^[a-zA-Z0-9_]{3,30}$/, 'Användarnamnet får bara innehålla bokstäver, siffror och understreck.']
+        match: [/^[a-zA-Z0-9_]{3,30}$/, 'Username can only contain letters, numbers, and underscores.']
     },
     password: {
         type: String,
@@ -19,14 +19,14 @@ const userSchema = new mongoose.Schema({
                 }
                 return true;
             },
-            message: 'Lösenordet måste innehålla minst 8 tecken, inklusive en stor bokstav, en liten bokstav, en siffra och ett specialtecken.'
+            message: 'Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, one number, and one special character.'
         }
     },
     email: {
         type: String,
         required: true,
         unique: true,
-        match: [/^\S+@\S+\.\S+$/, 'Ogiltig e-postadress.']
+        match: [/^\S+@\S+\.\S+$/, 'Invalid email address.']
     },
     friends: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -48,7 +48,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
     }]
-})
+});
 
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
