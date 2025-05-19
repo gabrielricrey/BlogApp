@@ -1,14 +1,16 @@
 import mongoose from 'mongoose';
 
 
-const blogSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        minlength: 1,
     },
     content: {
         type: String,
-        required: true
+        required: true,
+        minlength: 1,
     },
     likes: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -25,6 +27,6 @@ const blogSchema = new mongoose.Schema({
     }
 }, {timestamps: true})
 
-const BlogPost = mongoose.model('Blog', blogSchema)
+const BlogPost = mongoose.model('Blog', postSchema)
 
 export default BlogPost;
