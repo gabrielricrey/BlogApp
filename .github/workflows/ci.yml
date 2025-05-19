@@ -2,9 +2,9 @@ name: Run Backend Tests
 
 on:
   push:
-    branches: [main]
+    branches: [dev-gabriel]
   pull_request:
-    branches: [main]
+    branches: [dev-gabriel]
 
 jobs:
   backend-tests:
