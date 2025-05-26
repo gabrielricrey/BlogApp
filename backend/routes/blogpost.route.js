@@ -34,9 +34,10 @@ router.get('/byfriends', auth, async (req, res) => {
 
 router.get('/myposts', auth, async (req, res) => {
     const id = req.user.userId
+    console.log(id);
     try {
-        const posts = await BlogPost.find({ author: id }).populate('author').populate({ path: 'comments', populate: 'author' })
-
+        const posts = await BlogPost.find({ author: id }).populate({path: 'author', select: '-password'}).populate({ path: 'comments', populate: {path: 'author', select: '-password' }})
+        console.log(posts);
         res.status(200).json(posts)
     } catch (error) {
         res.status(500).json({ error: "Error getting blogposts", errorMessage: error })
