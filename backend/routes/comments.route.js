@@ -15,7 +15,7 @@ router.post('/:id', auth, async (req,res) => {
     }
 
     try{
-        const comment = await new Comment({content: body.comment, author: req.user.userId})
+        const comment = await new Comment({content: body.comment, author: req.user.userId, post: postId})
         comment.save();
 
         await BlogPost.findByIdAndUpdate(postId, { $push: {comments: comment._id}})
