@@ -1,5 +1,5 @@
 import React from 'react';
-import thumbnail from '../src/assets/thumbnail.png';
+import thumbnail from '../assets/thumbnail.png';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';

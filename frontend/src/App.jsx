@@ -1,15 +1,15 @@
 import { useState, useContext } from 'react'
 import './App.css'
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import LoginPage from '../pages/LoginPage';
-import StartPage from '../pages/StartPage';
-import RegisterPage from '../pages/RegisterPage';
-import ProfilePage from '../pages/ProfilePage'
-import SearchPage from '../pages/SearchPage';
-import NotificationContainer from '../components/NotificationContainer';
+import LoginPage from './pages/LoginPage';
+import StartPage from './pages/StartPage';
+import RegisterPage from './pages/RegisterPage';
+import ProfilePage from './pages/ProfilePage'
+import SearchPage from './pages/SearchPage';
+import NotificationContainer from './components/NotificationContainer';
 import { MagnifyingGlassIcon, UserCircleIcon, HomeIcon, BellIcon, PlusIcon } from '@heroicons/react/24/solid';
-import { UserContext } from '../context/UserContext';
-import CreateOrEditPostPage from '../pages/CreateOrEditPostPage';
+import { UserContext } from './context/UserContext';
+import CreateOrEditPostPage from './pages/CreateOrEditPostPage';
 import { Toaster } from 'react-hot-toast';
 
 
